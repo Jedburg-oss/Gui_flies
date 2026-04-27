@@ -1,0 +1,9 @@
+{
+  "runs": [
+    {
+      "date": "2026-04-26",
+      "file": "2026-04-26.csv",
+      "label": "Initial scan"
+    }
+  ]
+}

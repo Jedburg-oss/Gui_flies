@@ -1,0 +1,614 @@
+/* =====================================================
+   Boston → Japan Flight Tracker — Tokyo Twilight palette
+   ===================================================== */
+
+:root {
+  --ink:        #1A1F3A;
+  --ink-light:  #2A325E;
+  --cream:      #F5EFE0;
+  --cream-soft: #EBE3D0;
+  --crimson:    #C8344B;
+  --crimson-soft:#E85A6F;
+  --gold:       #D4A857;
+  --sage:       #7A9270;
+  --slate:      #5A6378;
+  --white:      #FFFFFF;
+  --charcoal:   #1A1A1A;
+  --green-deal: #2E7D5B;
+  --red-deal:   #C13B3B;
+
+  --serif:      'Fraunces', Georgia, serif;
+  --sans:       'Inter', -apple-system, sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  color: var(--charcoal);
+  background: var(--cream);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+@media (max-width: 720px) {
+  .container { padding: 0 20px; }
+}
+
+/* ============================ Hero ============================ */
+
+.hero {
+  background: var(--ink);
+  color: var(--cream);
+  padding: 80px 0 100px;
+  position: relative;
+  overflow: hidden;
+}
+
+.sun-motif {
+  position: absolute;
+  top: -150px;
+  right: -200px;
+  width: 700px;
+  height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    var(--crimson) 0%,
+    var(--crimson) 55%,
+    rgba(200, 52, 75, 0.4) 56%,
+    rgba(200, 52, 75, 0.4) 75%,
+    transparent 76%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero .container { position: relative; z-index: 1; max-width: 700px; margin-left: max(32px, calc((100% - 1200px) / 2)); }
+
+.eyebrow {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: var(--gold);
+  margin-bottom: 24px;
+  text-transform: uppercase;
+}
+
+.eyebrow.crimson { color: var(--crimson); }
+
+.hero h1 {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-style: italic;
+  font-size: clamp(64px, 11vw, 128px);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  margin-bottom: 32px;
+}
+
+.cream { color: var(--cream); }
+.crimson { color: var(--crimson-soft); }
+.gold { color: var(--gold); }
+
+.subtitle {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(18px, 2.2vw, 22px);
+  color: var(--cream-soft);
+  margin-bottom: 56px;
+  max-width: 540px;
+}
+
+.hero-stats {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-family: var(--serif);
+}
+
+.hero-stats .stat-num {
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.hero-stats .stat-label {
+  font-size: 14px;
+  color: var(--cream-soft);
+  font-family: var(--sans);
+  margin-right: 8px;
+}
+
+.hero-stats .divider {
+  color: var(--cream-soft);
+  margin: 0 8px;
+  font-size: 18px;
+}
+
+/* ============================ Run selector ============================ */
+
+.selector {
+  background: var(--ink);
+  color: var(--cream);
+  padding: 24px 0 32px;
+  border-top: 1px solid rgba(245, 239, 224, 0.1);
+}
+
+.selector .container {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.selector label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.selector .label-text {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: var(--gold);
+}
+
+.selector select {
+  background: var(--ink-light);
+  color: var(--cream);
+  border: 1px solid rgba(245, 239, 224, 0.2);
+  border-radius: 4px;
+  padding: 10px 16px;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 500;
+  min-width: 220px;
+  cursor: pointer;
+}
+
+.selector select:hover { border-color: var(--gold); }
+
+/* ============================ Section base ============================ */
+
+section {
+  padding: 80px 0;
+}
+
+section h2 {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-style: italic;
+  font-size: clamp(32px, 4vw, 44px);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-bottom: 40px;
+  max-width: 900px;
+}
+
+.cream-bg { background: var(--cream); }
+.dark-bg  { background: var(--ink); }
+.dark-bg h2 { color: var(--cream); }
+
+/* ============================ Stat grid (takeaway) ============================ */
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+.stat-card {
+  background: var(--white);
+  padding: 32px 24px 28px;
+  position: relative;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 5px;
+  background: var(--accent, var(--ink));
+}
+
+.stat-card .num {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-style: italic;
+  font-size: clamp(32px, 3.6vw, 48px);
+  color: var(--accent, var(--ink));
+  line-height: 1;
+  margin-bottom: 24px;
+  word-break: keep-all;
+}
+
+.stat-card .label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: var(--slate);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.stat-card .sub {
+  font-size: 13px;
+  color: var(--charcoal);
+  line-height: 1.4;
+}
+
+/* ============================ Changes section ============================ */
+
+.changes { background: var(--white); }
+
+.change-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-bottom: 56px;
+}
+
+.change-card {
+  padding: 28px 24px;
+  background: var(--cream);
+  border-left: 5px solid var(--accent, var(--slate));
+}
+
+.change-card .label {
+  font-size: 10px;
+  letter-spacing: 4px;
+  font-weight: 700;
+  color: var(--slate);
+  margin-bottom: 8px;
+}
+
+.change-card .delta {
+  font-family: var(--serif);
+  font-size: 36px;
+  font-weight: 700;
+  font-style: italic;
+  color: var(--accent, var(--ink));
+  margin-bottom: 4px;
+}
+
+.change-card .from-to {
+  font-size: 13px;
+  color: var(--slate);
+}
+
+.change-card.up    { --accent: var(--red-deal); }
+.change-card.down  { --accent: var(--green-deal); }
+.change-card.flat  { --accent: var(--slate); }
+
+.movers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+@media (max-width: 720px) {
+  .movers { grid-template-columns: 1fr; }
+}
+
+.movers-title {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-style: italic;
+  margin-bottom: 16px;
+}
+
+.movers-title.green { color: var(--green-deal); }
+.movers-title.red   { color: var(--red-deal); }
+
+.movers-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.movers-table td {
+  padding: 8px 4px;
+  border-bottom: 1px solid var(--cream-soft);
+}
+
+.movers-table .price-old {
+  color: var(--slate);
+  text-decoration: line-through;
+  font-size: 11px;
+}
+
+.movers-table .price-new {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.movers-table .delta-cell {
+  font-weight: 700;
+  text-align: right;
+}
+
+.movers-table .delta-down { color: var(--green-deal); }
+.movers-table .delta-up   { color: var(--red-deal); }
+
+/* ============================ Charts ============================ */
+
+.chart-wrap {
+  background: var(--white);
+  padding: 32px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+  height: 480px;
+}
+
+@media (max-width: 720px) {
+  .chart-wrap { height: 380px; padding: 16px; }
+}
+
+/* ============================ Destination grid ============================ */
+
+.dest-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.dest-card {
+  background: var(--white);
+  padding: 24px;
+  position: relative;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+}
+
+.dest-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 5px;
+  background: var(--accent);
+}
+
+.dest-card .code {
+  font-family: var(--serif);
+  font-size: 56px;
+  font-weight: 700;
+  font-style: italic;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.dest-card .name {
+  font-size: 12px;
+  color: var(--slate);
+  letter-spacing: 2px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  text-transform: uppercase;
+}
+
+.dest-card .from-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.dest-card .from-row .from {
+  font-size: 11px;
+  color: var(--slate);
+  font-style: italic;
+}
+
+.dest-card .from-row .from-price {
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.dest-card .meta {
+  font-size: 12px;
+  color: var(--slate);
+  margin-top: 8px;
+}
+
+/* ============================ Deal list ============================ */
+
+.deal-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.deal-row {
+  background: var(--ink-light);
+  padding: 16px 24px;
+  display: grid;
+  grid-template-columns: 50px 110px 1fr 70px 1fr 90px;
+  gap: 16px;
+  align-items: center;
+}
+
+@media (max-width: 720px) {
+  .deal-row {
+    grid-template-columns: 40px 1fr 1fr;
+    grid-template-rows: auto auto;
+    row-gap: 8px;
+  }
+}
+
+.deal-row .rank {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-style: italic;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.deal-row .rank.top { color: var(--crimson-soft); }
+
+.deal-row .price {
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--cream);
+}
+
+.deal-row .dates {
+  color: var(--cream);
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.deal-row .dates-sub {
+  color: var(--cream-soft);
+  font-size: 11px;
+  font-style: italic;
+}
+
+.deal-row .dest-code {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-style: italic;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.deal-row .airline {
+  color: var(--cream);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.deal-row .airline-sub {
+  color: var(--cream-soft);
+  font-size: 11px;
+  font-style: italic;
+}
+
+.deal-row .per-day {
+  text-align: right;
+  font-family: var(--serif);
+}
+
+.deal-row .per-day .num {
+  display: block;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--crimson-soft);
+}
+
+.deal-row .per-day .label {
+  display: block;
+  font-size: 9px;
+  color: var(--cream-soft);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.deal-row a {
+  color: inherit;
+  text-decoration: none;
+  display: contents;
+}
+
+.deal-row:hover { background: rgba(232, 90, 111, 0.08); cursor: pointer; }
+
+/* ============================ Methodology ============================ */
+
+.method-grid {
+  display: flex;
+  flex-direction: column;
+}
+
+.method-row {
+  display: grid;
+  grid-template-columns: 180px 1fr 2fr;
+  gap: 24px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--cream-soft);
+  align-items: baseline;
+}
+
+@media (max-width: 720px) {
+  .method-row { grid-template-columns: 1fr; gap: 8px; }
+}
+
+.method-row:last-child { border-bottom: none; }
+
+.method-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: var(--crimson);
+}
+
+.method-value {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-style: italic;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.method-detail {
+  font-size: 14px;
+  color: var(--charcoal);
+}
+
+.method-detail code {
+  background: var(--cream-soft);
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 13px;
+}
+
+/* ============================ Footer ============================ */
+
+footer {
+  background: var(--ink);
+  color: var(--cream-soft);
+  padding: 40px 0;
+  text-align: center;
+}
+
+footer p {
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+footer .muted {
+  margin-top: 8px;
+  color: var(--slate);
+  font-size: 11px;
+}
+
+/* ============================ Loading state ============================ */
+
+.loading {
+  text-align: center;
+  padding: 60px;
+  color: var(--slate);
+  font-style: italic;
+}
+
+.error-banner {
+  background: var(--crimson);
+  color: var(--cream);
+  padding: 16px 24px;
+  text-align: center;
+  font-weight: 500;
+}

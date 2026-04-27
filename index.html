@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boston → Japan · Flight Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="hero">
+  <div class="container">
+    <div class="eyebrow">DATA ANALYSIS · UPDATED <span id="header-date">—</span></div>
+    <h1>
+      <span class="cream">Boston</span><br>
+      <span class="crimson"><em>to Japan.</em></span>
+    </h1>
+    <p class="subtitle">14-day round-trip prices, scraped from KAYAK every two weeks.</p>
+    <div class="hero-stats" id="hero-stats">
+      <span class="stat-num">—</span>
+      <span class="stat-label">itineraries</span>
+      <span class="divider">·</span>
+      <span class="stat-num">—</span>
+      <span class="stat-label">airports</span>
+      <span class="divider">·</span>
+      <span class="stat-num">—</span>
+      <span class="stat-label">departure dates</span>
+    </div>
+  </div>
+  <div class="sun-motif"></div>
+</header>
+
+<!-- Run selector -->
+<section class="selector">
+  <div class="container">
+    <label>
+      <span class="label-text">VIEWING SCAN</span>
+      <select id="run-selector"></select>
+    </label>
+    <label>
+      <span class="label-text">COMPARED TO</span>
+      <select id="compare-selector"></select>
+    </label>
+  </div>
+</section>
+
+<!-- ========================================================== -->
+<!-- THE TAKEAWAY                                                 -->
+<!-- ========================================================== -->
+<section class="takeaway">
+  <div class="container">
+    <div class="eyebrow crimson">THE TAKEAWAY</div>
+    <h2>Five numbers that explain everything.</h2>
+
+    <div class="stat-grid" id="stat-grid">
+      <!-- populated by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================== -->
+<!-- CHANGES vs PREVIOUS                                          -->
+<!-- ========================================================== -->
+<section class="changes" id="changes-section" style="display:none;">
+  <div class="container">
+    <div class="eyebrow crimson">VS LAST SCAN</div>
+    <h2 id="changes-headline">What's changed.</h2>
+
+    <div class="change-grid" id="change-grid">
+      <!-- populated by JS -->
+    </div>
+
+    <div class="movers">
+      <div class="movers-col">
+        <h3 class="movers-title green">↓ Biggest price drops</h3>
+        <table class="movers-table" id="drops-table"></table>
+      </div>
+      <div class="movers-col">
+        <h3 class="movers-title red">↑ Biggest price hikes</h3>
+        <table class="movers-table" id="hikes-table"></table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================== -->
+<!-- WHEN TO FLY (months chart)                                   -->
+<!-- ========================================================== -->
+<section class="charts cream-bg">
+  <div class="container">
+    <div class="eyebrow crimson">WHEN TO FLY</div>
+    <h2 id="month-headline">Cheapest month vs most expensive.</h2>
+    <div class="chart-wrap">
+      <canvas id="month-chart"></canvas>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================== -->
+<!-- WHEN TO DEPART (day-of-week)                                 -->
+<!-- ========================================================== -->
+<section class="charts">
+  <div class="container">
+    <div class="eyebrow crimson">WHEN TO DEPART</div>
+    <h2 id="dow-headline">Day-of-week effect.</h2>
+    <div class="chart-wrap">
+      <canvas id="dow-chart"></canvas>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================== -->
+<!-- WHERE TO LAND (destinations)                                 -->
+<!-- ========================================================== -->
+<section class="charts cream-bg">
+  <div class="container">
+    <div class="eyebrow crimson">WHERE TO LAND</div>
+    <h2>Each airport, side by side.</h2>
+    <div class="dest-grid" id="dest-grid">
+      <!-- populated by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================== -->
+<!-- TOP 10 CHEAPEST                                              -->
+<!-- ========================================================== -->
+<section class="deals dark-bg">
+  <div class="container">
+    <div class="eyebrow gold">THE BEST DEALS</div>
+    <h2 class="cream">Top 10 cheapest itineraries.</h2>
+    <div class="deal-list" id="deal-list">
+      <!-- populated by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================== -->
+<!-- METHODOLOGY                                                  -->
+<!-- ========================================================== -->
+<section class="method cream-bg">
+  <div class="container">
+    <div class="eyebrow crimson">METHODOLOGY</div>
+    <h2>How this works.</h2>
+
+    <div class="method-grid">
+      <div class="method-row">
+        <div class="method-label">DATA SOURCE</div>
+        <div class="method-value">KAYAK.com</div>
+        <div class="method-detail">Direct headless scraping via Playwright + Chromium. Each price reflects the cheapest itinerary KAYAK displayed at scrape time.</div>
+      </div>
+      <div class="method-row">
+        <div class="method-label">CADENCE</div>
+        <div class="method-value">Every 2 weeks</div>
+        <div class="method-detail">Each scrape produces one CSV file. Files are stored in <code>data/</code> and tracked in <code>data/manifest.json</code>.</div>
+      </div>
+      <div class="method-row">
+        <div class="method-label">COVERAGE</div>
+        <div class="method-value">4 airports</div>
+        <div class="method-detail">Tokyo Narita (NRT), Tokyo Haneda (HND), Osaka Kansai (KIX), Nagoya Chubu (NGO). Trip length fixed at 14 days.</div>
+      </div>
+      <div class="method-row">
+        <div class="method-label">LIMITATIONS</div>
+        <div class="method-value">Snapshots</div>
+        <div class="method-detail">Prices reflect the moment of scraping — not real-time fares. Always verify current price on the airline site before booking.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>BOSTON → JAPAN · 14-Day Round-Trip Tracker · Built with vanilla JS + Chart.js</p>
+    <p class="muted">Last updated: <span id="footer-date">—</span></p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
